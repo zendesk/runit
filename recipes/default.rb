@@ -34,11 +34,10 @@ when "debian","ubuntu", "gentoo"
     action :nothing
   end
 
-  if platform? "gentoo"
-    template "/etc/init.d/runit-start" do
-      source "runit-start.sh.erb"
-      mode 0755
-    end
+  template "/etc/init.d/runit-start" do
+    source "runit-start.sh.erb"
+    mode 0755
+    only_if { platform? "gentoo" }
   end
 
   package "runit" do
